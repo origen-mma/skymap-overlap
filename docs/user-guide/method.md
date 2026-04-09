@@ -1,7 +1,7 @@
 # Method
 
 This page describes the statistical method implemented in **skymap-overlap**,
-based on [Piotrzkowski (2023)](https://doi.org/10.3847/1538-4357/acd3f2).
+using random skymap rotation trials.
 
 ## Background: The RAVEN Method
 
@@ -69,6 +69,22 @@ uniform random variables. Without it, the product $\text{FAR}_{\text{gw}} \times
 would follow a non-uniform distribution (it would be biased toward smaller
 values).
 
+### Visualization
+
+The figure below illustrates the full pipeline on a real GW+GRB skymap pair:
+
+![Overlap method visualization](../overlap_method.png)
+
+**Top row:** The GW skymap (LIGO BNS simulation, multi-lobed), the Fermi GBM
+localization, and their pixel-by-pixel product — only the region where both
+have significant probability contributes to the overlap integral.
+
+**Bottom left:** The Monte Carlo background distribution. The GRB skymap is
+rotated to 500 random sky positions and the overlap recomputed each time.
+Most random placements yield near-zero overlap (the skymaps don't intersect),
+but the observed overlap (red dashed line) sits in the tail — only 8.6% of
+random trials exceed it.
+
 ## Implementation Details
 
 ### Sparse HEALPix Representation
@@ -110,6 +126,4 @@ rayon.
 
 ## References
 
-- Piotrzkowski, B. (2023). "A Revised Method for Joint GW-GRB Detection."
-  *The Astrophysical Journal*. [doi:10.3847/1538-4357/acd3f2](https://doi.org/10.3847/1538-4357/acd3f2)
 - Urban, A. L. et al. (2016). "First results of the RAVEN pipeline."

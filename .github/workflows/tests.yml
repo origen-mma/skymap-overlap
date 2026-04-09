@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake
       - name: Cache cargo registry and build
         uses: actions/cache@v4
         with:
@@ -26,14 +28,14 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
+      - name: Check formatting
+        run: cargo fmt -- --check
+      - name: Clippy
+        run: cargo clippy --all-features -- -D warnings
       - name: Run tests
         run: cargo test --verbose
       - name: Run tests with python feature
         run: cargo test --features python --verbose
-      - name: Check formatting
-        run: cargo fmt -- --check
-      - name: Clippy
-        run: cargo clippy -- -D warnings
 
   python-tests:
     name: Python ${{ matrix.python-version }}
@@ -44,6 +46,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}

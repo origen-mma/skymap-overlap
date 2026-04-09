@@ -2,7 +2,6 @@
 
 Fast joint GW-GRB False Alarm Rate computation using empirical skymap overlap
 p-values, implementing the method of
-[Piotrzkowski (2023)](https://doi.org/10.3847/1538-4357/acd3f2).
 
 ## Overview
 
@@ -12,7 +11,6 @@ quantified by computing the overlap between their sky localization maps.
 
 The current RAVEN method divides the temporal FAR by the overlap integral
 $I_\Omega$, but this produces biased FAR distributions.
-**skymap-overlap** implements the corrected method from Piotrzkowski (2023):
 
 1. Rotate the GRB skymap to $N$ random sky positions
 2. Compute the overlap integral at each position

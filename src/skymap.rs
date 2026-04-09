@@ -180,7 +180,10 @@ impl SparseSkymap {
 
     /// Look up probability at a nested pixel index (binary search).
     pub fn probability_at(&self, nested_idx: u64) -> f64 {
-        match self.pixels.binary_search_by_key(&nested_idx, |&(idx, _)| idx) {
+        match self
+            .pixels
+            .binary_search_by_key(&nested_idx, |&(idx, _)| idx)
+        {
             Ok(pos) => self.pixels[pos].1,
             Err(_) => 0.0,
         }

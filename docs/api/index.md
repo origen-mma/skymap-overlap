@@ -81,7 +81,7 @@ CPU cores.
 
 #### `skymap_overlap.far_remapped(far_gw, grb_rate, time_window, p_value, far_gw_max) -> float`
 
-Corrected joint FAR (Eq 3 of Piotrzkowski 2023):
+Corrected joint FAR with remapping:
 
 $$
 \text{FAR}_c = \text{FAR}_{\text{gw}} \times R_{\text{grb}} \times \Delta t \times p \times \left[1 - \ln\left(\frac{\text{FAR}_{\text{gw}} \times p}{\text{FAR}_{\text{gw,max}}}\right)\right]

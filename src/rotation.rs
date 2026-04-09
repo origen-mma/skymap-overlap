@@ -8,12 +8,7 @@ use crate::skymap::SparseSkymap;
 
 /// Compute a 3×3 rotation matrix that maps `(src_ra, src_dec)` to
 /// `(tgt_ra, tgt_dec)` using Rodrigues' rotation formula.
-pub fn rotation_matrix(
-    src_ra: f64,
-    src_dec: f64,
-    tgt_ra: f64,
-    tgt_dec: f64,
-) -> [[f64; 3]; 3] {
+pub fn rotation_matrix(src_ra: f64, src_dec: f64, tgt_ra: f64, tgt_dec: f64) -> [[f64; 3]; 3] {
     let src = spherical_to_cartesian(src_ra, src_dec);
     let tgt = spherical_to_cartesian(tgt_ra, tgt_dec);
 
@@ -73,7 +68,11 @@ pub fn apply_rotation(m: &[[f64; 3]; 3], v: &[f64; 3]) -> [f64; 3] {
 pub fn spherical_to_cartesian(ra: f64, dec: f64) -> [f64; 3] {
     let ra_r = ra * PI / 180.0;
     let dec_r = dec * PI / 180.0;
-    [dec_r.cos() * ra_r.cos(), dec_r.cos() * ra_r.sin(), dec_r.sin()]
+    [
+        dec_r.cos() * ra_r.cos(),
+        dec_r.cos() * ra_r.sin(),
+        dec_r.sin(),
+    ]
 }
 
 /// Convert a Cartesian unit vector to (RA, Dec) in degrees.
@@ -118,10 +117,7 @@ pub fn rotate_skymap(
     let sum: f64 = acc.values().sum();
     let norm = if sum > 0.0 { sum } else { 1.0 };
 
-    let mut pixels: Vec<(u64, f64)> = acc
-        .into_iter()
-        .map(|(idx, p)| (idx, p / norm))
-        .collect();
+    let mut pixels: Vec<(u64, f64)> = acc.into_iter().map(|(idx, p)| (idx, p / norm)).collect();
     pixels.sort_by_key(|&(idx, _)| idx);
 
     SparseSkymap {

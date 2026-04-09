@@ -1,14 +1,14 @@
 //! Joint GW-GRB False Alarm Rate calculations.
 //!
 //! Implements both the original RAVEN method (Urban et al. 2016) and the
-//! corrected p-value method (Piotrzkowski 2023).
+//! corrected p-value method with remapping.
 
 /// Typical Fermi GBM gamma-ray burst detection rate (~325/year).
 pub const GBM_RATE_PER_YEAR: f64 = 325.0;
 /// GBM rate in Hz.
 pub const GBM_RATE_HZ: f64 = GBM_RATE_PER_YEAR / (365.25 * 24.0 * 3600.0);
 
-/// Original RAVEN joint FAR (Eq 1 of Piotrzkowski 2023).
+/// Original RAVEN joint FAR.
 ///
 /// FAR_c = FAR_gw × R_grb × Δt / I_Ω
 ///
@@ -33,7 +33,7 @@ pub fn far_raven(
     far_gw_hz * grb_rate_hz * time_window_s / overlap_integral
 }
 
-/// Corrected joint FAR using empirical p-values (Eq 3 of Piotrzkowski 2023).
+/// Corrected joint FAR using empirical p-values with remapping.
 ///
 /// FAR_c = FAR_gw × R_grb × Δt × p × [1 − ln(FAR_gw × p / FAR_gw_max)]
 ///

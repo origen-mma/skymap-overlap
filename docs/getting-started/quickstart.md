@@ -43,7 +43,7 @@ plt.show()
 ### Computing the Joint FAR
 
 ```python
-# Corrected method (Piotrzkowski 2023)
+# Corrected method (remapped FAR)
 far = skymap_overlap.far_remapped(
     far_gw=1e-7,                          # GW FAR in Hz
     grb_rate=skymap_overlap.GBM_RATE_HZ,  # GRB rate in Hz

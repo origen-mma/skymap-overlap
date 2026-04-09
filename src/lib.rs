@@ -1,7 +1,7 @@
 //! # skymap-overlap
 //!
 //! Fast joint GW-GRB False Alarm Rate computation using empirical
-//! skymap overlap p-values, as proposed by Piotrzkowski (2023).
+//! skymap overlap p-values, using random skymap rotations.
 //!
 //! The current RAVEN method (dividing temporal FAR by the overlap integral)
 //! produces biased FAR distributions. This crate implements the corrected
@@ -51,6 +51,6 @@ pub mod skymap;
 mod python;
 
 pub use error::Error;
-pub use far::{far_remapped, far_raven, far_temporal, GBM_RATE_HZ, GBM_RATE_PER_YEAR};
+pub use far::{far_raven, far_remapped, far_temporal, GBM_RATE_HZ, GBM_RATE_PER_YEAR};
 pub use overlap::{empirical_pvalue, overlap_integral, PvalueResult};
 pub use skymap::SparseSkymap;

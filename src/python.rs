@@ -1,5 +1,7 @@
 //! Python bindings for skymap-overlap via PyO3.
 
+#![allow(clippy::useless_conversion)]
+
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use pyo3::types::PyList;
@@ -34,7 +36,7 @@ impl PySkymap {
     /// -------
     /// Skymap
     #[staticmethod]
-    fn from_fits(path: &str) -> PyResult<Self> {
+    fn from_fits(path: &str) -> PyResult<PySkymap> {
         let inner = skymap::SparseSkymap::from_fits(path)
             .map_err(|e| PyValueError::new_err(e.to_string()))?;
         Ok(PySkymap { inner })
@@ -53,7 +55,7 @@ impl PySkymap {
     /// -------
     /// Skymap
     #[staticmethod]
-    fn from_dense(nside: u32, probs: Vec<f64>) -> PyResult<Self> {
+    fn from_dense(nside: u32, probs: Vec<f64>) -> PyResult<PySkymap> {
         let expected = 12 * (nside as usize) * (nside as usize);
         if probs.len() != expected {
             return Err(PyValueError::new_err(format!(
@@ -251,7 +253,7 @@ fn pvalue(gw: &PySkymap, grb: &PySkymap, n_trials: usize, seed: Option<u64>) -> 
     PyPvalueResult { inner }
 }
 
-/// Corrected joint FAR using empirical p-values (Eq 3, Piotrzkowski 2023).
+/// Corrected joint FAR using empirical p-values with remapping.
 ///
 ///     FAR_c = FAR_gw * R_grb * dt * p * [1 - ln(FAR_gw * p / FAR_gw_max)]
 ///
@@ -283,7 +285,7 @@ fn far_remapped(
     far::far_remapped(far_gw, grb_rate, time_window, p_value, far_gw_max)
 }
 
-/// Original RAVEN joint FAR (Eq 1, Piotrzkowski 2023).
+/// Original RAVEN joint FAR using overlap integral.
 ///
 ///     FAR_c = FAR_gw * R_grb * dt / I_Omega
 ///

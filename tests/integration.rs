@@ -1,8 +1,8 @@
 //! Integration tests for skymap-overlap using synthetic skymaps.
 
 use skymap_overlap::{
-    empirical_pvalue, far_remapped, far_raven, far_temporal, overlap_integral, GBM_RATE_HZ,
-    SparseSkymap,
+    empirical_pvalue, far_raven, far_remapped, far_temporal, overlap_integral, SparseSkymap,
+    GBM_RATE_HZ,
 };
 
 /// Create a uniform blob skymap with `n_pixels` contiguous pixels starting at `center_idx`.
