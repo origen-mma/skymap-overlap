@@ -1,0 +1,36 @@
+[package]
+name = "skymap-overlap"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+description = "Joint GW-GRB FAR via empirical skymap overlap p-values (Piotrzkowski 2023)"
+repository = "https://github.com/mcoughlin/skymap-overlap"
+
+[lib]
+name = "skymap_overlap"
+crate-type = ["lib", "cdylib"]
+
+[features]
+default = []
+python = ["pyo3"]
+
+[dependencies]
+cdshealpix = "0.7"
+fitsio = { version = "0.21", features = ["fitsio-src"] }
+thiserror = "2"
+rand = "0.8"
+rand_chacha = "0.3"
+rayon = "1.10"
+
+[dependencies.pyo3]
+version = "0.22"
+features = ["extension-module"]
+optional = true
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+approx = "0.5"
+
+[[bench]]
+name = "rotation_pvalue"
+harness = false

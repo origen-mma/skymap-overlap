@@ -1,0 +1,13 @@
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "skymap-overlap"
+version = "0.1.0"
+requires-python = ">=3.9"
+description = "Joint GW-GRB FAR via empirical skymap overlap p-values"
+license = { text = "GPL-3.0-or-later" }
+
+[tool.maturin]
+features = ["python"]
