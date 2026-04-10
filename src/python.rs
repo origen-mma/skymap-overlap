@@ -203,7 +203,9 @@ impl PyPvalueResult {
 ///
 /// The overlap integral is defined as:
 ///
-///     I_Omega = sum_i p_gw(i) * p_grb(i)
+/// ```text
+/// I_Omega = sum_i p_gw(i) * p_grb(i)
+/// ```
 ///
 /// For skymaps at different NSIDEs, the coarser map is automatically
 /// upsampled.
@@ -255,7 +257,9 @@ fn pvalue(gw: &PySkymap, grb: &PySkymap, n_trials: usize, seed: Option<u64>) -> 
 
 /// Corrected joint FAR using empirical p-values with remapping.
 ///
-///     FAR_c = FAR_gw * R_grb * dt * p * [1 - ln(FAR_gw * p / FAR_gw_max)]
+/// ```text
+/// FAR_c = FAR_gw * R_grb * dt * p * [1 - ln(FAR_gw * p / FAR_gw_max)]
+/// ```
 ///
 /// Parameters
 /// ----------
@@ -287,7 +291,9 @@ fn far_remapped(
 
 /// Original RAVEN joint FAR using overlap integral.
 ///
-///     FAR_c = FAR_gw * R_grb * dt / I_Omega
+/// ```text
+/// FAR_c = FAR_gw * R_grb * dt / I_Omega
+/// ```
 ///
 /// This formula is known to produce biased FAR distributions. Prefer
 /// :func:`far_remapped` for production use.
@@ -314,7 +320,9 @@ fn far_raven(far_gw: f64, grb_rate: f64, time_window: f64, overlap_val: f64) -> 
 
 /// Temporal-only joint FAR (no spatial information).
 ///
-///     FAR_t = FAR_gw * R_grb * dt
+/// ```text
+/// FAR_t = FAR_gw * R_grb * dt
+/// ```
 ///
 /// Parameters
 /// ----------
