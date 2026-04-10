@@ -1,8 +1,8 @@
 site_name: skymap-overlap
-site_url: https://mcoughlin.github.io/skymap-overlap/
+site_url: https://origen-mma.github.io/skymap-overlap/
 site_description: Fast joint GW-GRB FAR via empirical skymap overlap p-values
-repo_url: https://github.com/mcoughlin/skymap-overlap
-repo_name: mcoughlin/skymap-overlap
+repo_url: https://github.com/origen-mma/skymap-overlap
+repo_name: origen-mma/skymap-overlap
 
 theme:
   name: material
@@ -53,7 +53,7 @@ extra_javascript:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/mcoughlin/skymap-overlap
+      link: https://github.com/origen-mma/skymap-overlap
 
 nav:
   - Home: index.md

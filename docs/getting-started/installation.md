@@ -14,7 +14,7 @@ Building from source requires a Rust toolchain (1.70+) and
 [maturin](https://www.maturin.rs/):
 
 ```bash
-git clone https://github.com/mcoughlin/skymap-overlap.git
+git clone https://github.com/origen-mma/skymap-overlap.git
 cd skymap-overlap
 pip install maturin
 maturin develop --release --features python
@@ -33,7 +33,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-skymap-overlap = { git = "https://github.com/mcoughlin/skymap-overlap" }
+skymap-overlap = { git = "https://github.com/origen-mma/skymap-overlap" }
 ```
 
 ### System Requirements
